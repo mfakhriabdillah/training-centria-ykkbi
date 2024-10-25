@@ -1,10 +1,8 @@
 name: CICD Docker
-
 on:
   push:
     branches:
       - master
-
 jobs:
   continious-integration:
     runs-on: ubuntu-latest
@@ -14,3 +12,12 @@ jobs:
       
       - name: Check the code
         run: ls
+
+      - name: Test the code
+        run: go test -v ./...
+
+      - name: Build code to Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          tags: fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
