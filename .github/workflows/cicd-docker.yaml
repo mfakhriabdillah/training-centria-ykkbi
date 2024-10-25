@@ -32,3 +32,17 @@ jobs:
         with:
           push: true
           tags: fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
+
+  continious-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: multiple command
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            docker pull fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
+            docker run -d --name training-containter -p 8000:8000 fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
