@@ -34,6 +34,7 @@ jobs:
           tags: fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
 
   continious-deployment:
+    needs: continious-integration
     runs-on: ubuntu-latest
     steps:
       - name: multiple command
