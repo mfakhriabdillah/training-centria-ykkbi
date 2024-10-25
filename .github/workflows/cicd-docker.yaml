@@ -16,8 +16,14 @@ jobs:
       - name: Test the code
         run: go test -v ./...
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build code to Docker Image
         uses: docker/build-push-action@v6
         with:
-          push: false
+          push: true
           tags: fakhriabdillah/training-centria-ykkbi:1.${{ github.run_number }}
