@@ -1,0 +1,16 @@
+name: CICD Docker
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  continious-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest version repository
+        uses: actions/checkout@v4
+      
+      - name: Check the code
+        run: ls
